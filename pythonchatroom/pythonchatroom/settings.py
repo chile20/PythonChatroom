@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "core",
+    "channels"
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "pythonchatroom.wsgi.application"
+ASGI_APPLICATION = "pythonchatroom.asgi.application"
 
 
 # Database
