@@ -1,23 +1,59 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}Djangochat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .messages {
+            height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <nav class="fixed overflow-hidden z-20 w-full bg-white/80 border-b border-[--ui-light-border-color] border-x backdrop-blur-2xl">
+        <div class="px-6 m-auto max-w-6xl 2xl:px-0">
+            <div class="flex flex-wrap items-center justify-between py-2 sm:py-4">
+                <div class="w-full items-center flex justify-between lg:w-auto">
+                    <a href="/">
+                        PythonChatRoom
+                    </a>
+                    <div class="flex lg:hidden">
+                        <button aria-label="humburger" id="menu" class="relative border bordeer-gray-950/30 size-9 rounded-full transition duration-300 active:scale-95">
+                            <div aria-hidden="true" id="line1" class="m-auto h-[1.5px] w-4 rounded bg-gray-900 transition duration-300"></div>
+                            <div aria-hidden="true" id="line2" class="m-auto mt-1.5 h-[1.5px] w-4 rounded bg-gray-900 transition duration-300"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full h-0 lg:w-fit flex-wrap justify-end items-center space-y-8 lg:space-y-0 lg:flex lg:h-fit md:flex-nowrap">
+                    <div class="w-full space-y-2 gap-2 pt-6 pb-4 lg:pb-0 border-t border-[--ui-light-border-color] items-center flex flex-col lg:flex-row lg:space-y-0 lg:w-fit lg:border-l lg:border-t-0 lg:pt-0 lg:pl-2">
+                        {% if request.user.is_authenticated %}
+                        <a href="/rooms/" class="w-full h-9 lg:w-fit group flex items-center rounded-[--btn-border-radius] disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 *:disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 text-gray-800 hover:bg-gray-100 active:bg-gray-200/75 lg:text-sm lg:h-8 px-3.5 justify-center">
+                            <span>Chatrooms</span>
+                        </a>
+                        <a href="/logout/" class="w-full h-9 lg:w-fit group flex items-center rounded-[--btn-border-radius] disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 *:disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 text-gray-800 hover:bg-gray-100 active:bg-gray-200/75 lg:text-sm lg:h-8 px-3.5 justify-center">
+                            <span>Logout</span>
+                        </a>
+                        {% else %}
+                        <a href="/login/" class="w-full h-9 lg:w-fit group flex items-center rounded-[--btn-border-radius] disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 *:disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 text-gray-800 hover:bg-gray-100 active:bg-gray-200/75 lg:text-sm lg:h-8 px-3.5 justify-center">
+                            <span>Login</span>
+                        </a>
+                        <a href="/signup/" class="w-full h-9 text-white lg:w-fit group flex items-center relative border rounded-[--btn-border-radius] *:select-none [&>*:not(.sr-only)]:relative before:rounded-[calc(var(--btn-border-radius)-1px)] before:absolute before:inset-0 before:border before:bg-gradient-to-b *:disabled:opacity-20 disabled:text-gray-950/40 disabled:border-gray-200 disabled:bg-gray-100 disabled:*:text-gray-300 disabled:before:border-transparent disabled:before:bg-gray-100 disabled:before:from-transparenttext-white border-gray-950 bg-gray-600 before:border-gray-600 before:from-gray-800 hover:bg-gray-900 active:bg-gray-950lg:text-sm lg:h-8 px-3 justify-center">
+                            <span>Sign Up</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block content %}
+    {% endblock %}
 
-        <title>Python Chat Room</title>
-
-        <script src="https://cdn.tailwindcss.com"></script>
-
-        <style>
-            .messages {
-                height: 400px;
-                overflow-y: auto;
-            }
-        </style>
-    </head>
-
-    <body class="">
-        <p>Test</p>
-    </body>
+    {% block scripts %}
+    {% endblock %}
+</body>
 </html>
