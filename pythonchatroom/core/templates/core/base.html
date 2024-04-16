@@ -1,3 +1,4 @@
+<!-- Navigation Bar -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,9 +34,12 @@
                         <a href="/rooms/" class="w-full h-9 lg:w-fit group flex items-center rounded-[--btn-border-radius] disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 *:disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 text-gray-800 hover:bg-gray-100 active:bg-gray-200/75 lg:text-sm lg:h-8 px-3.5 justify-center">
                             <span>Chatrooms</span>
                         </a>
-                        <a href="/logout/" class="w-full h-9 lg:w-fit group flex items-center rounded-[--btn-border-radius] disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 *:disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 text-gray-800 hover:bg-gray-100 active:bg-gray-200/75 lg:text-sm lg:h-8 px-3.5 justify-center">
-                            <span>Logout</span>
-                        </a>
+                        <!-- Django-5 requires doing logoutView through a POST REQUEST -->
+                        <form method="post" action="/logout/" class="w-full h-9 lg:w-fit group flex items-center rounded-[--btn-border-radius] disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 *:disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 text-gray-800 hover:bg-gray-100 active:bg-gray-200/75 lg:text-sm lg:h-8 px-3.5 justify-center">
+                            {% csrf_token %}
+                            <button type="submit" class="w-full h-full">
+                                <span>Log out</span>
+                            </button>
                         {% else %}
                         <a href="/login/" class="w-full h-9 lg:w-fit group flex items-center rounded-[--btn-border-radius] disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 *:disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 text-gray-800 hover:bg-gray-100 active:bg-gray-200/75 lg:text-sm lg:h-8 px-3.5 justify-center">
                             <span>Login</span>
