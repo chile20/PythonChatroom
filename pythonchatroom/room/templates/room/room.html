@@ -57,50 +57,41 @@
     }
 
     chatSocket.onmessage = function(e) {
-    const data = JSON.parse(e.data);
+        const data = JSON.parse(e.data);
 
-    if (data.message) {
-        // Create a new message element
-        const messageElement = document.createElement('div');
-        messageElement.innerHTML = '<b>' + data.username + '</b>: ' + data.message + '<br>';
-
-        // Prepend the new message to the top of the messages container
-        const chatMessagesContainer = document.querySelector('#chat-messages');
-        chatMessagesContainer.insertBefore(messageElement, chatMessagesContainer.firstChild);
-    } else {
-        alert('The message was empty!');
-    }
-};
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {
-            document.querySelector('#chat-message-submit').click();
+        if (data.message) {
+            document.querySelector('#chat-messages').innerHTML += ('<b>' + data.username + '</b>: ' + data.message + '<br>');
+        } else {
+            alert('The message was empty!')
         }
+
+        scrollToBottom();
     };
 
+    document.querySelector('#chat-message-input').focus();
+
     document.querySelector('#chat-message-submit').onclick = function(e) {
-    e.preventDefault(); // Prevents form submission
+        e.preventDefault()
 
-    const messageInputDom = document.querySelector('#chat-message-input');
-    const message = messageInputDom.value.trim(); // Trims whitespace
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
 
-    if (message) {
-        // If the message is not empty, send it through the WebSocket
+        console.log({
+            'message': message,
+            'username': userName,
+            'room': roomName
+        })
+
         chatSocket.send(JSON.stringify({
             'message': message,
             'username': userName,
             'room': roomName
         }));
 
-        // Clear the input field after sending
         messageInputDom.value = '';
-    } else {
-        // Show an alert if the message is empty
-        alert('The message is empty!');
-    }
 
-    return false; // Prevents form submission
-};
+        return false
+    };
 
     /**
     * A function for finding the messages element, and scroll to the bottom of it.
@@ -128,7 +119,7 @@
             inputField.focus();
         });
 
-        // Optional: Hide emoji picker when the input field is focused
+        // Hide emoji picker when the input field is focused
         inputField.addEventListener('focus', () => {
             emojiPicker.style.display = 'none';
         });
