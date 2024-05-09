@@ -14,13 +14,16 @@ from django.core.asgi import get_asgi_application
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 
-import room.routing
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pythonchatroom.settings")
+django_asgi_app = get_asgi_application()
 
-application = ProtocolTypeRouter(
-    {
-        "http": get_asgi_application(),
-        "websocket": AuthMiddlewareStack(URLRouter(room.routing.websocket_urlpatterns)),
-    }
-)
+from room.routing import websocket_urlpatterns
+
+application = ProtocolTypeRouter({
+    "http": get_asgi_application(),
+    "websocket": AuthMiddlewareStack(
+        URLRouter(
+            websocket_urlpatterns
+        )
+    ),
+})
