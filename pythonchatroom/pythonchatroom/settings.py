@@ -56,6 +56,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.herokuapp.com',
+    'https://python-chat-019d01755ef6.herokuapp.com',
+]
+
 ROOT_URLCONF = "pythonchatroom.urls"
 
 TEMPLATES = [
