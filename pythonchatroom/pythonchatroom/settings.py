@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-^lnen_*bfqf%!+^jl1c1yl81%_uf6xuap66y=a54en10ol4ml^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'python-chat-019d01755ef6.herokuapp.com']
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/rooms/'
